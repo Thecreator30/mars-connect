@@ -12,6 +12,7 @@ interface Node {
 
 export function NetworkBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -22,6 +23,7 @@ export function NetworkBackground() {
     let animId: number;
     let nodes: Node[] = [];
     const CONNECTION_DIST = 220;
+    const MOUSE_DIST = 280;
     const NODE_COUNT_BASE = 70;
 
     function resize() {
@@ -44,28 +46,27 @@ export function NetworkBackground() {
       }));
     }
 
-    // MARS green and blue
-    const green = { r: 0, g: 199, b: 100 }; // hsl(152 100% 39%)
-    const blue = { r: 46, g: 63, b: 173 };  // hsl(228 75% 42%)
+    const green = { r: 0, g: 199, b: 100 };
+    const blue = { r: 46, g: 63, b: 173 };
 
     function draw() {
       const w = canvas!.width;
       const h = canvas!.height;
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
       ctx!.clearRect(0, 0, w, h);
 
-      // Update positions
       for (const n of nodes) {
         n.x += n.vx;
         n.y += n.vy;
         n.pulse += n.pulseSpeed;
-
         if (n.x < 0 || n.x > w) n.vx *= -1;
         if (n.y < 0 || n.y > h) n.vy *= -1;
         n.x = Math.max(0, Math.min(w, n.x));
         n.y = Math.max(0, Math.min(h, n.y));
       }
 
-      // Draw connections
+      // Node-to-node connections
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -73,7 +74,6 @@ export function NetworkBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DIST) {
             const alpha = (1 - dist / CONNECTION_DIST) * 0.3;
-            // Alternate colors
             const color = (i + j) % 3 === 0 ? green : blue;
             ctx!.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`;
             ctx!.lineWidth = 0.5;
@@ -85,44 +85,82 @@ export function NetworkBackground() {
         }
       }
 
+      // Mouse-to-node connections
+      for (const n of nodes) {
+        const dx = n.x - mx;
+        const dy = n.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_DIST) {
+          const alpha = (1 - dist / MOUSE_DIST) * 0.6;
+          ctx!.strokeStyle = `rgba(${green.r},${green.g},${green.b},${alpha})`;
+          ctx!.lineWidth = 1;
+          ctx!.beginPath();
+          ctx!.moveTo(mx, my);
+          ctx!.lineTo(n.x, n.y);
+          ctx!.stroke();
+        }
+      }
+
+      // Mouse glow
+      if (mx > 0 && my > 0) {
+        const grad = ctx!.createRadialGradient(mx, my, 0, mx, my, 60);
+        grad.addColorStop(0, `rgba(${green.r},${green.g},${green.b},0.15)`);
+        grad.addColorStop(1, `rgba(${green.r},${green.g},${green.b},0)`);
+        ctx!.fillStyle = grad;
+        ctx!.beginPath();
+        ctx!.arc(mx, my, 60, 0, Math.PI * 2);
+        ctx!.fill();
+      }
+
       // Draw nodes
       for (const n of nodes) {
         const pulseAlpha = 0.3 + Math.sin(n.pulse) * 0.15;
-        const isGreen = Math.random() > 0.5;
-        const color = isGreen ? green : blue;
+        const dxM = n.x - mx;
+        const dyM = n.y - my;
+        const distM = Math.sqrt(dxM * dxM + dyM * dyM);
+        const nearMouse = distM < MOUSE_DIST;
+        const color = nearMouse ? green : ((Math.floor(n.x + n.y)) % 3 === 0 ? green : blue);
+        const boost = nearMouse ? 1.5 : 1;
 
         // Glow
         ctx!.beginPath();
-        ctx!.arc(n.x, n.y, n.radius * 4, 0, Math.PI * 2);
-        const grad = ctx!.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.radius * 4);
-        grad.addColorStop(0, `rgba(${color.r},${color.g},${color.b},${pulseAlpha * 0.4})`);
+        ctx!.arc(n.x, n.y, n.radius * 4 * boost, 0, Math.PI * 2);
+        const grad = ctx!.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.radius * 4 * boost);
+        grad.addColorStop(0, `rgba(${color.r},${color.g},${color.b},${pulseAlpha * 0.5 * boost})`);
         grad.addColorStop(1, `rgba(${color.r},${color.g},${color.b},0)`);
         ctx!.fillStyle = grad;
         ctx!.fill();
 
         // Core dot
         ctx!.beginPath();
-        ctx!.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx!.fillStyle = `rgba(${color.r},${color.g},${color.b},${pulseAlpha})`;
+        ctx!.arc(n.x, n.y, n.radius * boost, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(${color.r},${color.g},${color.b},${pulseAlpha * boost})`;
         ctx!.fill();
       }
 
       animId = requestAnimationFrame(draw);
     }
 
+    const onMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+    };
+    const onMouseLeave = () => {
+      mouseRef.current = { x: -9999, y: -9999 };
+    };
+
     resize();
     initNodes();
     draw();
 
-    const onResize = () => {
-      resize();
-      initNodes();
-    };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", () => { resize(); initNodes(); });
+    window.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", () => { resize(); initNodes(); });
+      window.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
