@@ -90,6 +90,16 @@ export function NetworkBackground() {
         if (n.y < 0 || n.y > h) n.vy *= -1;
         n.x = Math.max(0, Math.min(w, n.x));
         n.y = Math.max(0, Math.min(h, n.y));
+
+        // Parallax repulsion from mouse
+        const pdx = n.x - mx;
+        const pdy = n.y - my;
+        const pDist = Math.sqrt(pdx * pdx + pdy * pdy);
+        if (pDist < MOUSE_DIST && pDist > 1) {
+          const force = (1 - pDist / MOUSE_DIST) * 1.5;
+          n.x += (pdx / pDist) * force;
+          n.y += (pdy / pDist) * force;
+        }
       }
 
       // Node-to-node connections
