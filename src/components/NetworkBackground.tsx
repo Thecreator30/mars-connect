@@ -21,12 +21,12 @@ export function NetworkBackground() {
 
     let animId: number;
     let nodes: Node[] = [];
-    const CONNECTION_DIST = 180;
-    const NODE_COUNT_BASE = 45;
+    const CONNECTION_DIST = 220;
+    const NODE_COUNT_BASE = 70;
 
     function resize() {
       canvas!.width = window.innerWidth;
-      canvas!.height = document.documentElement.scrollHeight;
+      canvas!.height = window.innerHeight;
     }
 
     function initNodes() {
@@ -72,7 +72,7 @@ export function NetworkBackground() {
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DIST) {
-            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.3;
             // Alternate colors
             const color = (i + j) % 3 === 0 ? green : blue;
             ctx!.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`;
@@ -130,7 +130,7 @@ export function NetworkBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.6 }}
+      style={{ opacity: 0.9 }}
     />
   );
 }

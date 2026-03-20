@@ -29,7 +29,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative z-10">
       <Navbar />
 
       <section className="pt-32 pb-16">

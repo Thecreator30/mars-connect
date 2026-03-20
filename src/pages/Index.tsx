@@ -505,7 +505,7 @@ function NewsletterSection() {
 /* ─── PAGE INDEX ─── */
 export default function Index() {
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
+    <div className="min-h-screen relative z-10 overflow-hidden">
       <Navbar />
       <HeroSection />
       <FlagshipSection />
