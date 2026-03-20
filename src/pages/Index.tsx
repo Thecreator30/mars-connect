@@ -1,16 +1,511 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { Link } from "react-router-dom";
+import {
+  Bot, ShoppingBag, Building2, Home, Zap,
+  TrendingUp, Shield, Users, Award, ArrowRight,
+  Star, CreditCard, Wallet, Landmark, Mail, ChevronRight,
+  Sparkles, Target, Globe
+} from "lucide-react";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+/* ─── Animated Counter ─── */
+function Counter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          let start = 0;
+          const duration = 2000;
+          const step = (ts: number) => {
+            if (!start) start = ts;
+            const progress = Math.min((ts - start) / duration, 1);
+            setCount(Math.floor(progress * end));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+}
+
+/* ─── Scroll Reveal wrapper ─── */
+function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("revealed");
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
     </div>
   );
-};
+}
 
-const Index = PlaceholderIndex;
+/* ─── HERO ─── */
+function HeroSection() {
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated grid background */}
+      <div className="absolute inset-0 hero-grid opacity-40" />
 
-export default Index;
+      {/* Glow orbs */}
+      <div className="glow-orb w-96 h-96 bg-primary/30 top-1/4 -left-48 animate-pulse-glow" />
+      <div className="glow-orb w-80 h-80 bg-accent/20 bottom-1/4 -right-40 animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-4xl">
+        <Reveal>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-primary mb-8">
+            <Sparkles size={14} />
+            Lancement Q2 2026 — Rejoignez les pionniers
+          </div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-foreground mb-6" style={{ textWrap: "balance" }}>
+            L'écosystème digital qui{" "}
+            <span className="text-primary text-glow-green">change les règles</span>
+          </h1>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" style={{ textWrap: "pretty" }}>
+            Services digitaux, immobiliers et énergétiques distribués en réseau.
+            5 catégories de services. Un seul écosystème. Des revenus illimités.
+          </p>
+        </Reveal>
+
+        <Reveal delay={300}>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/opportunite">
+              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-8 h-12 text-base box-glow-green active:scale-[0.97] transition-transform">
+                Rejoignez-nous
+                <ArrowRight size={18} />
+              </Button>
+            </Link>
+            <Link to="/services">
+              <Button variant="outline" size="lg" className="font-heading font-medium px-8 h-12 text-base border-border/60 hover:border-primary/50 hover:text-primary active:scale-[0.97] transition-transform">
+                Découvrir nos produits
+              </Button>
+            </Link>
+          </div>
+        </Reveal>
+
+        {/* Stats row */}
+        <Reveal delay={500}>
+          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8">
+            {[
+              { value: 5, suffix: "", label: "Services intégrés" },
+              { value: 8, suffix: "", label: "Rangs de progression" },
+              { value: 15, suffix: "+", label: "Conteneurs Docker" },
+              { value: 5, suffix: "", label: "Types de commissions" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="font-heading font-bold text-3xl md:text-4xl text-primary">
+                  <Counter end={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── FLAGSHIP PRODUCTS ─── */
+function FlagshipSection() {
+  const products = [
+    {
+      icon: ShoppingBag,
+      name: "Ekonom-IA",
+      tagline: "Marketplace locale intelligente",
+      desc: "Transformez chaque passant en client fidèle. QR codes, notifications géolocalisées, coupons et fidélisation automatisée par IA pour les commerçants.",
+      color: "primary" as const,
+      features: ["QR codes dynamiques", "Géolocalisation", "Fidélisation IA", "App consommateur PWA"],
+    },
+    {
+      icon: Bot,
+      name: "Auxil-IA",
+      tagline: "Agent IA pour professionnels",
+      desc: "Automatisez la gestion de vos emails, générez du contenu et assistez vos clients 24/7 avec un chatbot intelligent alimenté par l'IA.",
+      color: "accent" as const,
+      features: ["Chatbot client 24/7", "Automatisation emails", "Génération de contenu", "Rapports IA"],
+    },
+  ];
+
+  return (
+    <section className="py-24 md:py-32 relative">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="text-center mb-16">
+            <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Produits phares</p>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+              Deux solutions qui révolutionnent le terrain
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {products.map((p, i) => (
+            <Reveal key={p.name} delay={i * 120}>
+              <div className="group glass rounded-2xl p-8 hover:border-primary/30 transition-all duration-500 h-full flex flex-col">
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
+                  p.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
+                } group-hover:scale-105 transition-transform duration-300`}>
+                  <p.icon size={28} />
+                </div>
+                <h3 className="font-heading font-bold text-2xl text-foreground mb-1">{p.name}</h3>
+                <p className={`text-sm font-medium mb-4 ${p.color === "primary" ? "text-primary" : "text-accent"}`}>
+                  {p.tagline}
+                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
+                  {p.desc}
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {p.features.map((f) => (
+                    <div key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <ChevronRight size={12} className={p.color === "primary" ? "text-primary" : "text-accent"} />
+                      {f}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── ECOSYSTEM ─── */
+function EcosystemSection() {
+  const services = [
+    { icon: Bot, name: "Auxil-IA", desc: "SaaS d'IA pour professionnels", color: "text-accent" },
+    { icon: ShoppingBag, name: "Ekonom-IA", desc: "Marketplace locale & fidélisation", color: "text-primary" },
+    { icon: Building2, name: "Mara-A Construct", desc: "Rénovation énergétique BE/FR", color: "text-orange-400" },
+    { icon: Home, name: "Mara-A Invest", desc: "Investissement immobilier belge", color: "text-blue-400" },
+    { icon: Zap, name: "Énergie", desc: "Fourniture gaz & électricité", color: "text-yellow-400" },
+  ];
+
+  return (
+    <section className="py-24 md:py-32 relative bg-card/30">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="text-center mb-16">
+            <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Écosystème</p>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+              5 catégories de services, un réseau unique
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+          {services.map((s, i) => (
+            <Reveal key={s.name} delay={i * 80}>
+              <div className="group glass rounded-2xl p-6 text-center hover:border-primary/30 transition-all duration-400 cursor-default">
+                <div className={`w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-muted/50 ${s.color} group-hover:scale-110 transition-transform duration-300`}>
+                  <s.icon size={24} />
+                </div>
+                <h3 className="font-heading font-semibold text-sm text-foreground mb-1">{s.name}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── OPPORTUNITY ─── */
+function OpportunitySection() {
+  const ranks = [
+    "Candidat", "Consultant", "Manager", "Directeur",
+    "Vice-Président", "Président", "Diamant", "Ambassadeur"
+  ];
+
+  return (
+    <section className="py-24 md:py-32 relative">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="text-center mb-16">
+            <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Opportunité</p>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+              Un plan de rémunération structuré et ambitieux
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
+          {[
+            { icon: TrendingUp, title: "5 types de commissions", desc: "Directes, par niveau, bonus de rang, matching et dossier — chaque vente récompensée." },
+            { icon: Award, title: "Fast Start 500€", desc: "Atteignez 25 000 BV en 15 jours et décrochez votre prime de démarrage rapide." },
+            { icon: Target, title: "Boost x1.5", desc: "À partir de 51 produits vendus, vos commissions passent au multiplicateur 1.5x." },
+          ].map((item, i) => (
+            <Reveal key={item.title} delay={i * 100}>
+              <div className="glass rounded-2xl p-8 text-center hover:border-primary/30 transition-all duration-400">
+                <div className="w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-primary/10 text-primary">
+                  <item.icon size={24} />
+                </div>
+                <h3 className="font-heading font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Ranks progression */}
+        <Reveal>
+          <div className="glass rounded-2xl p-8 max-w-4xl mx-auto">
+            <h3 className="font-heading font-semibold text-center text-foreground mb-6">8 rangs de progression</h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {ranks.map((rank, i) => (
+                <div
+                  key={rank}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+                >
+                  <span className="w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
+                    {i + 1}
+                  </span>
+                  {rank}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <div className="text-center mt-10">
+            <Link to="/opportunite">
+              <Button variant="outline" className="font-heading border-primary/30 text-primary hover:bg-primary/10 active:scale-[0.97] transition-transform">
+                Voir le plan complet
+                <ArrowRight size={16} />
+              </Button>
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── ADVANTAGES ─── */
+function AdvantagesSection() {
+  const items = [
+    { icon: Globe, title: "Infrastructure scalable", desc: "15+ conteneurs Docker indépendants, SSL auto, APIs REST, bases de données séparées." },
+    { icon: Shield, title: "Technologie propriétaire", desc: "Pas des maquettes — du code en production. Complexité technique = avantage compétitif durable." },
+    { icon: Users, title: "Réseau structuré", desc: "Chaque consultant vend tous les services via sa boutique personnalisée avec design premium." },
+  ];
+
+  return (
+    <section className="py-24 md:py-32 bg-card/30">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="text-center mb-16">
+            <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Avantages</p>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+              Pourquoi Mars Group
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {items.map((item, i) => (
+            <Reveal key={item.title} delay={i * 100}>
+              <div className="glass rounded-2xl p-8 hover:border-primary/30 transition-all duration-400 h-full">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-primary/10 text-primary">
+                  <item.icon size={24} />
+                </div>
+                <h3 className="font-heading font-semibold text-lg text-foreground mb-3">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── TESTIMONIAL ─── */
+function TestimonialSection() {
+  return (
+    <section className="py-24 md:py-32">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex justify-center gap-1 mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={20} className="text-primary fill-primary" />
+              ))}
+            </div>
+            <blockquote className="text-xl md:text-2xl text-foreground leading-relaxed font-medium mb-8" style={{ textWrap: "balance" }}>
+              "Mars Group m'a donné accès à un écosystème complet de services que je n'aurais jamais pu construire seul.
+              En 3 mois, j'ai atteint le rang de Manager."
+            </blockquote>
+            <div>
+              <div className="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center font-heading font-bold mx-auto mb-3">
+                SL
+              </div>
+              <p className="font-heading font-semibold text-foreground">Sophie Laurent</p>
+              <p className="text-sm text-muted-foreground">Consultante Manager — Liège, Belgique</p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── ACADEMY ─── */
+function AcademySection() {
+  return (
+    <section className="py-24 md:py-32 bg-card/30">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="max-w-3xl mx-auto glass rounded-2xl p-10 md:p-14 text-center">
+            <div className="w-14 h-14 rounded-xl mx-auto flex items-center justify-center mb-6 bg-accent/10 text-accent">
+              <Sparkles size={28} />
+            </div>
+            <h2 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-4">
+              Mars Academy
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-8 max-w-lg mx-auto">
+              Formations complètes pour maîtriser chaque service, développer votre réseau et maximiser vos revenus.
+              Accès illimité dès votre inscription.
+            </p>
+            <Link to="/academie">
+              <Button className="btn-neon bg-accent text-accent-foreground font-heading font-semibold px-8 h-12 box-glow-cyan active:scale-[0.97] transition-transform">
+                Découvrir l'Académie
+                <ArrowRight size={18} />
+              </Button>
+            </Link>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── PAYMENTS ─── */
+function PaymentsSection() {
+  const methods = [
+    { icon: CreditCard, name: "Carte bancaire", desc: "Visa, Mastercard" },
+    { icon: Wallet, name: "Revolut", desc: "Paiement instantané" },
+    { icon: Landmark, name: "Virement SEPA", desc: "Européen sécurisé" },
+  ];
+
+  return (
+    <section className="py-24 md:py-32">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="text-center mb-12">
+            <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Paiements</p>
+            <h2 className="font-heading font-bold text-2xl md:text-3xl text-foreground">
+              Méthodes de paiement flexibles
+            </h2>
+          </div>
+        </Reveal>
+
+        <div className="flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
+          {methods.map((m, i) => (
+            <Reveal key={m.name} delay={i * 100}>
+              <div className="glass rounded-xl px-8 py-6 text-center min-w-[180px] hover:border-primary/30 transition-all duration-300">
+                <m.icon size={28} className="text-primary mx-auto mb-3" />
+                <p className="font-heading font-semibold text-sm text-foreground">{m.name}</p>
+                <p className="text-xs text-muted-foreground mt-1">{m.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── NEWSLETTER ─── */
+function NewsletterSection() {
+  return (
+    <section className="py-24 md:py-32 bg-card/30">
+      <div className="container mx-auto px-4 md:px-8">
+        <Reveal>
+          <div className="max-w-xl mx-auto text-center">
+            <Mail size={32} className="text-primary mx-auto mb-4" />
+            <h2 className="font-heading font-bold text-2xl md:text-3xl text-foreground mb-3">
+              Restez informé
+            </h2>
+            <p className="text-muted-foreground text-sm mb-8">
+              Recevez les actualités de l'écosystème Mars Group et les dates de lancement.
+            </p>
+            <form
+              className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <input
+                type="email"
+                placeholder="votre@email.com"
+                className="flex-1 h-12 px-4 rounded-xl bg-muted/50 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm"
+              />
+              <Button className="btn-neon bg-primary text-primary-foreground font-heading font-semibold h-12 px-6 box-glow-green active:scale-[0.97] transition-transform">
+                S'inscrire
+              </Button>
+            </form>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ─── PAGE INDEX ─── */
+export default function Index() {
+  return (
+    <div className="min-h-screen bg-background overflow-hidden">
+      <Navbar />
+      <HeroSection />
+      <FlagshipSection />
+      <EcosystemSection />
+      <OpportunitySection />
+      <AdvantagesSection />
+      <TestimonialSection />
+      <AcademySection />
+      <PaymentsSection />
+      <NewsletterSection />
+      <Footer />
+    </div>
+  );
+}
