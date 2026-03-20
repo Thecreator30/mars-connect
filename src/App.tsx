@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { NetworkBackground } from "@/components/NetworkBackground";
 import Index from "./pages/Index.tsx";
 import Services from "./pages/Services.tsx";
 import Opportunite from "./pages/Opportunite.tsx";
@@ -17,6 +18,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <NetworkBackground />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
