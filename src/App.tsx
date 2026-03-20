@@ -9,6 +9,7 @@ import Services from "./pages/Services.tsx";
 import Opportunite from "./pages/Opportunite.tsx";
 import Academie from "./pages/Academie.tsx";
 import Contact from "./pages/Contact.tsx";
+import Landing from "./pages/Landing.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/opportunite" element={<Opportunite />} />
           <Route path="/academie" element={<Academie />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/landing" element={<Landing />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
