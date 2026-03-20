@@ -74,19 +74,13 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 
 /* ─── HERO ─── */
 function HeroSection() {
+  const words = ["Votre", "carrière", "clés", "en", "main"];
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 hero-grid opacity-30" />
+      <div className="absolute inset-0 hero-grid opacity-20" />
 
-      {/* Molecular/network background */}
-      <div className="absolute inset-0 molecular-bg" />
-
-      {/* Glow orbs */}
-      <div className="glow-orb w-[500px] h-[500px] bg-primary/20 top-1/4 -left-64 animate-pulse-glow" />
-      <div className="glow-orb w-[400px] h-[400px] bg-accent/15 bottom-1/4 -right-48 animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
-
-      <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-4xl">
+      <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-5xl">
         <Reveal>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-primary mb-8 border-primary/20">
             <Sparkles size={14} />
@@ -95,28 +89,35 @@ function HeroSection() {
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-foreground mb-6" style={{ lineHeight: "1.05" }}>
-            <span className="text-primary text-glow-green">Votre</span> carrière{" "}
-            clés en main
+          <h1 className="font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-foreground mb-8" style={{ lineHeight: "0.95" }}>
+            {words.map((word, i) => (
+              <span
+                key={i}
+                className={`inline-block animate-fade-in ${i === 0 ? "text-primary text-glow-green" : ""}`}
+                style={{ animationDelay: `${300 + i * 120}ms`, animationFillMode: "both" }}
+              >
+                {word}{i < words.length - 1 ? "\u00A0" : ""}
+              </span>
+            ))}
           </h1>
         </Reveal>
 
-        <Reveal delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" style={{ textWrap: "pretty" as any }}>
-            Chez Mars, nous avons développé une opportunité clé en main qui vous permet de faire évoluer votre carrière sereinement et efficacement.
+        <Reveal delay={300}>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed" style={{ textWrap: "pretty" as any }}>
+            Un écosystème digital complet — 7 produits, 5 sources de revenus, 0 barrière à l'entrée. Construisez votre réseau avec la technologie de demain.
           </p>
         </Reveal>
 
-        <Reveal delay={300}>
+        <Reveal delay={450}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/contact">
-              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-8 h-14 text-base box-glow-green active:scale-[0.97] transition-transform">
+              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-10 h-14 text-base box-glow-green active:scale-[0.97] transition-transform">
                 Rejoignez-nous
                 <ArrowRight size={18} />
               </Button>
             </Link>
             <Link to="/services">
-              <Button variant="outline" size="lg" className="font-heading font-medium px-8 h-14 text-base border-primary/30 hover:border-primary/60 hover:text-primary active:scale-[0.97] transition-transform">
+              <Button variant="outline" size="lg" className="font-heading font-medium px-10 h-14 text-base border-primary/30 hover:border-primary/60 hover:text-primary active:scale-[0.97] transition-transform">
                 Découvrir nos services
               </Button>
             </Link>
@@ -124,8 +125,8 @@ function HeroSection() {
         </Reveal>
 
         {/* Stats row */}
-        <Reveal delay={500}>
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
+        <Reveal delay={650}>
+          <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
             {[
               { value: 7, suffix: "", label: "Produits & services" },
               { value: 8, suffix: "", label: "Rangs de progression" },
@@ -133,7 +134,7 @@ function HeroSection() {
               { value: 28, suffix: "%", label: "Delta max" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="font-heading font-bold text-3xl md:text-4xl text-primary text-glow-green">
+                <div className="font-heading font-bold text-3xl md:text-4xl text-primary text-glow-green tabular-nums">
                   <Counter end={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">
