@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
+import marsLogo from "@/assets/mars-logo.png";
 
 export function Footer() {
   return (
@@ -8,14 +9,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-heading font-bold text-primary-foreground text-sm">
-                M
-              </div>
-              <span className="font-heading font-bold text-lg text-foreground">
-                MARS <span className="text-primary">GROUP</span>
-              </span>
-            </div>
+            <Link to="/">
+              <img src={marsLogo} alt="MARS Group" className="h-8 w-auto" />
+            </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
               L'écosystème digital qui connecte consultants indépendants à un portefeuille complet de services innovants.
             </p>
@@ -27,13 +23,19 @@ export function Footer() {
               Navigation
             </h4>
             <div className="flex flex-col gap-2">
-              {["Accueil", "Services", "Opportunité", "Académie", "Contact"].map((label, i) => (
+              {[
+                { label: "Accueil", to: "/" },
+                { label: "Services", to: "/services" },
+                { label: "Opportunité", to: "/opportunite" },
+                { label: "Académie", to: "/academie" },
+                { label: "Contact", to: "/contact" },
+              ].map((link) => (
                 <Link
-                  key={label}
-                  to={["/ ", "/services", "/opportunite", "/academie", "/contact"][i]}
+                  key={link.label}
+                  to={link.to}
                   className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
                 >
-                  {label}
+                  {link.label}
                 </Link>
               ))}
             </div>
@@ -45,7 +47,7 @@ export function Footer() {
               Nos Services
             </h4>
             <div className="flex flex-col gap-2">
-              {["Ekonom-IA", "Auxil-IA", "Mara-A Construct", "Mara-A Invest", "Énergie"].map((s) => (
+              {["Ekonom-IA", "Auxil-IA", "Mara-A Construct", "Mara-A Invest", "Ecofix Énergie"].map((s) => (
                 <span key={s} className="text-sm text-muted-foreground">
                   {s}
                 </span>
@@ -71,7 +73,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Mars Group. Tous droits réservés.
+            © {new Date().getFullYear()} MARS Legacy Group SA. Tous droits réservés.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-xs text-muted-foreground hover:text-primary transition-colors">

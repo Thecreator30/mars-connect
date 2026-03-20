@@ -76,45 +76,47 @@ function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated grid background */}
-      <div className="absolute inset-0 hero-grid opacity-40" />
+      <div className="absolute inset-0 hero-grid opacity-30" />
+
+      {/* Molecular/network background */}
+      <div className="absolute inset-0 molecular-bg" />
 
       {/* Glow orbs */}
-      <div className="glow-orb w-96 h-96 bg-primary/30 top-1/4 -left-48 animate-pulse-glow" />
-      <div className="glow-orb w-80 h-80 bg-accent/20 bottom-1/4 -right-40 animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+      <div className="glow-orb w-[500px] h-[500px] bg-primary/20 top-1/4 -left-64 animate-pulse-glow" />
+      <div className="glow-orb w-[400px] h-[400px] bg-accent/15 bottom-1/4 -right-48 animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
 
       <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-4xl">
         <Reveal>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-primary mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-primary mb-8 border-primary/20">
             <Sparkles size={14} />
             Lancement Q2 2026 — Rejoignez les pionniers
           </div>
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-foreground mb-6" style={{ textWrap: "balance" }}>
-            L'écosystème digital qui{" "}
-            <span className="text-primary text-glow-green">change les règles</span>
+          <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-foreground mb-6" style={{ lineHeight: "1.05" }}>
+            <span className="text-primary text-glow-green">Votre</span> carrière{" "}
+            clés en main
           </h1>
         </Reveal>
 
         <Reveal delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" style={{ textWrap: "pretty" }}>
-            Services digitaux, immobiliers et énergétiques distribués en réseau.
-            5 catégories de services. Un seul écosystème. Des revenus illimités.
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" style={{ textWrap: "pretty" as any }}>
+            Chez Mars, nous avons développé une opportunité clé en main qui vous permet de faire évoluer votre carrière sereinement et efficacement.
           </p>
         </Reveal>
 
         <Reveal delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/opportunite">
-              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-8 h-12 text-base box-glow-green active:scale-[0.97] transition-transform">
+            <Link to="/contact">
+              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-8 h-14 text-base box-glow-green active:scale-[0.97] transition-transform">
                 Rejoignez-nous
                 <ArrowRight size={18} />
               </Button>
             </Link>
             <Link to="/services">
-              <Button variant="outline" size="lg" className="font-heading font-medium px-8 h-12 text-base border-border/60 hover:border-primary/50 hover:text-primary active:scale-[0.97] transition-transform">
-                Découvrir nos produits
+              <Button variant="outline" size="lg" className="font-heading font-medium px-8 h-14 text-base border-primary/30 hover:border-primary/60 hover:text-primary active:scale-[0.97] transition-transform">
+                Découvrir nos services
               </Button>
             </Link>
           </div>
@@ -122,7 +124,7 @@ function HeroSection() {
 
         {/* Stats row */}
         <Reveal delay={500}>
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8">
+          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
             {[
               { value: 7, suffix: "", label: "Produits & services" },
               { value: 8, suffix: "", label: "Rangs de progression" },
@@ -130,7 +132,7 @@ function HeroSection() {
               { value: 28, suffix: "%", label: "Delta max" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="font-heading font-bold text-3xl md:text-4xl text-primary">
+                <div className="font-heading font-bold text-3xl md:text-4xl text-primary text-glow-green">
                   <Counter end={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">
@@ -155,6 +157,7 @@ function FlagshipSection() {
       desc: "Transformez chaque passant en client fidèle. QR codes, notifications géolocalisées, coupons et fidélisation automatisée par IA pour les commerçants.",
       color: "primary" as const,
       features: ["QR codes dynamiques", "Géolocalisation", "Fidélisation IA", "App consommateur PWA"],
+      url: "https://ekonom-ia.com",
     },
     {
       icon: Bot,
@@ -163,6 +166,7 @@ function FlagshipSection() {
       desc: "Automatisez la gestion de vos emails, générez du contenu et assistez vos clients 24/7 avec un chatbot intelligent alimenté par l'IA.",
       color: "accent" as const,
       features: ["Chatbot client 24/7", "Automatisation emails", "Génération de contenu", "Rapports IA"],
+      url: "https://auxil-ia.io",
     },
   ];
 
@@ -172,7 +176,7 @@ function FlagshipSection() {
         <Reveal>
           <div className="text-center mb-16">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Produits phares</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Deux solutions qui révolutionnent le terrain
             </h2>
           </div>
@@ -181,7 +185,9 @@ function FlagshipSection() {
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {products.map((p, i) => (
             <Reveal key={p.name} delay={i * 120}>
-              <div className="group glass rounded-2xl p-8 hover:border-primary/30 transition-all duration-500 h-full flex flex-col">
+              <div className={`group glass rounded-2xl p-8 transition-all duration-500 h-full flex flex-col ${
+                p.color === "primary" ? "hover:border-primary/40 hover:shadow-[0_0_30px_hsl(145_100%_45%/0.08)]" : "hover:border-accent/40 hover:shadow-[0_0_30px_hsl(187_100%_42%/0.08)]"
+              }`}>
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
                   p.color === "primary" ? "bg-primary/10 text-primary" : "bg-accent/10 text-accent"
                 } group-hover:scale-105 transition-transform duration-300`}>
@@ -194,7 +200,7 @@ function FlagshipSection() {
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
                   {p.desc}
                 </p>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2 mb-6">
                   {p.features.map((f) => (
                     <div key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
                       <ChevronRight size={12} className={p.color === "primary" ? "text-primary" : "text-accent"} />
@@ -202,6 +208,11 @@ function FlagshipSection() {
                     </div>
                   ))}
                 </div>
+                <a href={p.url} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="sm" className={`font-heading ${p.color === "primary" ? "border-primary/30 text-primary hover:bg-primary/10" : "border-accent/30 text-accent hover:bg-accent/10"} active:scale-[0.97] transition-transform`}>
+                    Visiter le site <ArrowRight size={14} />
+                  </Button>
+                </a>
               </div>
             </Reveal>
           ))}
@@ -214,11 +225,11 @@ function FlagshipSection() {
 /* ─── ECOSYSTEM ─── */
 function EcosystemSection() {
   const services = [
-    { icon: Bot, name: "Auxil-IA", desc: "SaaS d'IA pour professionnels", color: "text-accent" },
-    { icon: ShoppingBag, name: "Ekonom-IA", desc: "Marketplace locale & fidélisation", color: "text-primary" },
-    { icon: Building2, name: "Mara-A Construct", desc: "Rénovation énergétique BE/FR", color: "text-orange-400" },
-    { icon: Home, name: "Mara-A Invest", desc: "Investissement immobilier belge", color: "text-blue-400" },
-    { icon: Zap, name: "Énergie", desc: "Fourniture gaz & électricité", color: "text-yellow-400" },
+    { icon: Bot, name: "Auxil-IA", desc: "SaaS d'IA pour professionnels", color: "text-accent", border: "hover:border-accent/40" },
+    { icon: ShoppingBag, name: "Ekonom-IA", desc: "Marketplace locale & fidélisation", color: "text-primary", border: "hover:border-primary/40" },
+    { icon: Building2, name: "Mara-A Construct", desc: "Rénovation énergétique BE/FR", color: "text-orange-400", border: "hover:border-orange-400/40" },
+    { icon: Home, name: "Mara-A Invest", desc: "Investissement immobilier belge", color: "text-blue-400", border: "hover:border-blue-400/40" },
+    { icon: Zap, name: "Ecofix Énergie", desc: "Fourniture gaz & électricité", color: "text-yellow-400", border: "hover:border-yellow-400/40" },
   ];
 
   return (
@@ -227,8 +238,8 @@ function EcosystemSection() {
         <Reveal>
           <div className="text-center mb-16">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Écosystème</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
-              5 catégories de services, un réseau unique
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
+              Un portefeuille complet de services
             </h2>
           </div>
         </Reveal>
@@ -236,7 +247,7 @@ function EcosystemSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
           {services.map((s, i) => (
             <Reveal key={s.name} delay={i * 80}>
-              <div className="group glass rounded-2xl p-6 text-center hover:border-primary/30 transition-all duration-400 cursor-default">
+              <div className={`group glass rounded-2xl p-6 text-center ${s.border} transition-all duration-400 cursor-default`}>
                 <div className={`w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-muted/50 ${s.color} group-hover:scale-110 transition-transform duration-300`}>
                   <s.icon size={24} />
                 </div>
@@ -264,7 +275,7 @@ function OpportunitySection() {
         <Reveal>
           <div className="text-center mb-16">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Opportunité</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Un plan de rémunération anti-pyramidal et équitable
             </h2>
           </div>
@@ -272,13 +283,13 @@ function OpportunitySection() {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
           {[
-            { icon: TrendingUp, title: "Système Delta", desc: "Calcul différentiel qui garantit l'équité : vos commissions reflètent vos ventes réelles, pas le recrutement." },
-            { icon: Award, title: "Fast Start 250 € + 250 €", desc: "Atteignez 25 000 BV en 60 jours — bonus versé au membre ET au parrain. Doublé à 50 000 BV." },
-            { icon: Target, title: "Jusqu'à 28 % Delta", desc: "8 rangs de progression avec des taux Delta de 0 % à 28 %, plus Mobility et Home Bonus." },
+            { icon: TrendingUp, title: "Système Delta", desc: "Calcul différentiel qui garantit l'équité : vos commissions reflètent vos ventes réelles, pas le recrutement.", color: "primary" },
+            { icon: Award, title: "Fast Start 250 € + 250 €", desc: "Atteignez 25 000 BV en 60 jours — bonus versé au membre ET au parrain. Doublé à 50 000 BV.", color: "accent" },
+            { icon: Target, title: "Jusqu'à 28 % Delta", desc: "8 rangs de progression avec des taux Delta de 0 % à 28 %, plus Mobility et Home Bonus.", color: "primary" },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 100}>
-              <div className="glass rounded-2xl p-8 text-center hover:border-primary/30 transition-all duration-400">
-                <div className="w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-primary/10 text-primary">
+              <div className={`glass rounded-2xl p-8 text-center transition-all duration-400 hover:border-${item.color}/30 hover:shadow-[0_0_30px_hsl(145_100%_45%/0.06)]`}>
+                <div className={`w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-${item.color}/10 text-${item.color}`}>
                   <item.icon size={24} />
                 </div>
                 <h3 className="font-heading font-semibold text-foreground mb-2">{item.title}</h3>
@@ -290,13 +301,13 @@ function OpportunitySection() {
 
         {/* Ranks progression */}
         <Reveal>
-          <div className="glass rounded-2xl p-8 max-w-4xl mx-auto">
+          <div className="glass rounded-2xl p-8 max-w-4xl mx-auto border-primary/10">
             <h3 className="font-heading font-semibold text-center text-foreground mb-6">8 rangs de progression</h3>
             <div className="flex flex-wrap justify-center gap-3">
               {ranks.map((rank, i) => (
                 <div
                   key={rank}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 text-sm font-medium transition-all duration-300 hover:border-primary/50 hover:text-primary hover:bg-primary/5"
                 >
                   <span className="w-5 h-5 rounded-full bg-primary/20 text-primary text-xs flex items-center justify-center font-bold">
                     {i + 1}
@@ -337,7 +348,7 @@ function AdvantagesSection() {
         <Reveal>
           <div className="text-center mb-16">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Avantages</p>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Pourquoi Mars Group
             </h2>
           </div>
@@ -346,7 +357,7 @@ function AdvantagesSection() {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {items.map((item, i) => (
             <Reveal key={item.title} delay={i * 100}>
-              <div className="glass rounded-2xl p-8 hover:border-primary/30 transition-all duration-400 h-full">
+              <div className="glass rounded-2xl p-8 hover:border-primary/30 transition-all duration-400 h-full hover:shadow-[0_0_30px_hsl(145_100%_45%/0.06)]">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 bg-primary/10 text-primary">
                   <item.icon size={24} />
                 </div>
@@ -373,7 +384,7 @@ function TestimonialSection() {
                 <Star key={i} size={20} className="text-primary fill-primary" />
               ))}
             </div>
-            <blockquote className="text-xl md:text-2xl text-foreground leading-relaxed font-medium mb-8" style={{ textWrap: "balance" }}>
+            <blockquote className="text-xl md:text-2xl text-foreground leading-relaxed font-medium mb-8" style={{ textWrap: "balance" as any }}>
               "Mars Group m'a donné accès à un écosystème complet de services que je n'aurais jamais pu construire seul.
               En 3 mois, j'ai atteint le rang de Manager."
             </blockquote>
@@ -397,7 +408,7 @@ function AcademySection() {
     <section className="py-24 md:py-32 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
-          <div className="max-w-3xl mx-auto glass rounded-2xl p-10 md:p-14 text-center">
+          <div className="max-w-3xl mx-auto glass rounded-2xl p-10 md:p-14 text-center border-accent/10">
             <div className="w-14 h-14 rounded-xl mx-auto flex items-center justify-center mb-6 bg-accent/10 text-accent">
               <Sparkles size={28} />
             </div>
@@ -436,7 +447,7 @@ function PaymentsSection() {
           <div className="text-center mb-12">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Paiements</p>
             <h2 className="font-heading font-bold text-2xl md:text-3xl text-foreground">
-              Méthodes de paiement flexibles
+              Paiements automatisés
             </h2>
           </div>
         </Reveal>
