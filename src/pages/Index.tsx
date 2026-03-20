@@ -79,7 +79,7 @@ function HeroSection() {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 hero-grid opacity-20" />
+      <div className="absolute inset-0" />
 
       <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-5xl">
         <Reveal>
