@@ -44,11 +44,12 @@ export function SepaLogo({ className = "" }: { className?: string }) {
 
 export function BancontactLogo({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-1.5 ${className}`}>
-      <div className="flex">
-        <div className="w-3 h-5 rounded-l-sm bg-accent/90" />
-        <div className="w-3 h-5 rounded-r-sm bg-primary/90" />
-      </div>
+    <div className={`flex items-center gap-2 ${className}`}>
+      <svg viewBox="0 0 40 28" className="w-10 h-7" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="20" height="28" rx="4" fill="#005498" />
+        <rect x="16" y="0" width="24" height="28" rx="4" fill="#FFD800" />
+        <ellipse cx="20" cy="14" rx="8" ry="10" fill="#005498" opacity="0.6" />
+      </svg>
       <span className="font-heading font-bold text-sm text-foreground/80 tracking-tight">Bancontact</span>
     </div>
   );
