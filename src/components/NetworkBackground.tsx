@@ -184,17 +184,19 @@ export function NetworkBackground() {
       mouseRef.current = { x: -9999, y: -9999 };
     };
 
+    const handleResize = () => { resize(); initNodes(); };
+
     resize();
     initNodes();
     draw();
 
-    window.addEventListener("resize", () => { resize(); initNodes(); });
+    window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
 
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener("resize", () => { resize(); initNodes(); });
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
     };
