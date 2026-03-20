@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import marsLogo from "@/assets/mars-logo.png";
 
 const navLinks = [
   { label: "Accueil", to: "/" },
@@ -37,12 +38,11 @@ export function Navbar() {
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center font-heading font-bold text-primary-foreground text-sm transition-shadow duration-300 group-hover:box-glow-green">
-            M
-          </div>
-          <span className="font-heading font-bold text-lg tracking-tight text-foreground">
-            MARS <span className="text-primary">GROUP</span>
-          </span>
+          <img
+            src={marsLogo}
+            alt="MARS Group"
+            className="h-8 w-auto transition-all duration-300 group-hover:brightness-110"
+          />
         </Link>
 
         {/* Desktop links */}
@@ -51,7 +51,7 @@ export function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+              className={`px-4 py-2 text-sm font-medium tracking-wide uppercase rounded-lg transition-all duration-200 ${
                 location.pathname === link.to
                   ? "text-primary bg-primary/10"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -64,12 +64,14 @@ export function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
-          <Button
-            className="btn-neon bg-primary text-primary-foreground font-heading font-semibold tracking-wide hover:bg-primary/90 box-glow-green"
-            size="sm"
-          >
-            Rejoignez-nous
-          </Button>
+          <a href="https://crm.mars-lgc.com" target="_blank" rel="noopener noreferrer">
+            <Button
+              className="btn-neon bg-primary text-primary-foreground font-heading font-semibold tracking-wide hover:bg-primary/90 box-glow-green"
+              size="sm"
+            >
+              Me connecter
+            </Button>
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -90,7 +92,7 @@ export function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-4 py-3 text-sm font-medium uppercase tracking-wide rounded-lg transition-colors ${
                   location.pathname === link.to
                     ? "text-primary bg-primary/10"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -99,9 +101,11 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button className="mt-3 btn-neon bg-primary text-primary-foreground font-heading font-semibold">
-              Rejoignez-nous
-            </Button>
+            <a href="https://crm.mars-lgc.com" target="_blank" rel="noopener noreferrer">
+              <Button className="mt-3 w-full btn-neon bg-primary text-primary-foreground font-heading font-semibold">
+                Me connecter
+              </Button>
+            </a>
           </div>
         </div>
       )}
