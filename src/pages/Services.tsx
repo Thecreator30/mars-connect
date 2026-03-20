@@ -6,6 +6,7 @@ import {
   Bot, ShoppingBag, Building2, Home, Zap,
   ArrowRight, ChevronRight, ExternalLink
 } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
