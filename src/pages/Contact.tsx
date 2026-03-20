@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Send, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
+import { useSEO } from "@/hooks/useSEO";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,6 +21,7 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 }
 
 export default function Contact() {
+  useSEO({ title: "Contact", description: "Contactez Mars Group pour rejoindre le réseau ou en savoir plus sur nos services digitaux, immobiliers et énergétiques.", path: "/contact" });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {

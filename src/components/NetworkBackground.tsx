@@ -183,6 +183,13 @@ export function NetworkBackground() {
     const onMouseLeave = () => {
       mouseRef.current = { x: -9999, y: -9999 };
     };
+    const onTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) mouseRef.current = { x: t.clientX, y: t.clientY };
+    };
+    const onTouchEnd = () => {
+      mouseRef.current = { x: -9999, y: -9999 };
+    };
 
     const handleResize = () => { resize(); initNodes(); };
 
@@ -193,12 +200,16 @@ export function NetworkBackground() {
     window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    window.addEventListener("touchend", onTouchEnd);
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 

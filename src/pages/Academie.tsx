@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { BookOpen, Video, Users, Award, ArrowRight, ChevronRight } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -41,6 +42,7 @@ const modules = [
 ];
 
 export default function Academie() {
+  useSEO({ title: "Académie", description: "Mars Academy : formations complètes pour maîtriser les produits, développer votre réseau et maximiser vos revenus.", path: "/academie" });
   return (
     <div className="min-h-screen relative z-10">
       <Navbar />

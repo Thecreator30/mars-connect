@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import {
   Bot, ShoppingBag, Building2, Home, Zap,
   TrendingUp, Shield, Users, Award, ArrowRight,
-  Star, CreditCard, Wallet, Landmark, Mail, ChevronRight,
+  Star, Mail, ChevronRight,
   Sparkles, Target, Globe
 } from "lucide-react";
+import { VisaLogo, MastercardLogo, RevolutLogo, SepaLogo, BancontactLogo } from "@/components/PaymentLogos";
+import { useSEO } from "@/hooks/useSEO";
 
 /* ─── Animated Counter ─── */
 function Counter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
@@ -73,19 +75,13 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 
 /* ─── HERO ─── */
 function HeroSection() {
+  const words = ["Votre", "carrière", "clés", "en", "main"];
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated grid background */}
-      <div className="absolute inset-0 hero-grid opacity-30" />
+      <div className="absolute inset-0 hero-grid opacity-20" />
 
-      {/* Molecular/network background */}
-      <div className="absolute inset-0 molecular-bg" />
-
-      {/* Glow orbs */}
-      <div className="glow-orb w-[500px] h-[500px] bg-primary/20 top-1/4 -left-64 animate-pulse-glow" />
-      <div className="glow-orb w-[400px] h-[400px] bg-accent/15 bottom-1/4 -right-48 animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
-
-      <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-4xl">
+      <div className="relative z-10 container mx-auto px-4 md:px-8 text-center max-w-5xl">
         <Reveal>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-medium text-primary mb-8 border-primary/20">
             <Sparkles size={14} />
@@ -94,28 +90,35 @@ function HeroSection() {
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-heading font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-foreground mb-6" style={{ lineHeight: "1.05" }}>
-            <span className="text-primary text-glow-green">Votre</span> carrière{" "}
-            clés en main
+          <h1 className="font-heading font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight text-foreground mb-8" style={{ lineHeight: "0.95" }}>
+            {words.map((word, i) => (
+              <span
+                key={i}
+                className={`inline-block animate-fade-in ${i === 0 ? "text-primary text-glow-green" : ""}`}
+                style={{ animationDelay: `${300 + i * 120}ms`, animationFillMode: "both" }}
+              >
+                {word}{i < words.length - 1 ? "\u00A0" : ""}
+              </span>
+            ))}
           </h1>
         </Reveal>
 
-        <Reveal delay={200}>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed" style={{ textWrap: "pretty" as any }}>
-            Chez Mars, nous avons développé une opportunité clé en main qui vous permet de faire évoluer votre carrière sereinement et efficacement.
+        <Reveal delay={300}>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed" style={{ textWrap: "pretty" as any }}>
+            Un écosystème digital complet — 7 produits, 5 sources de revenus, 0 barrière à l'entrée. Construisez votre réseau avec la technologie de demain.
           </p>
         </Reveal>
 
-        <Reveal delay={300}>
+        <Reveal delay={450}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/contact">
-              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-8 h-14 text-base box-glow-green active:scale-[0.97] transition-transform">
+              <Button size="lg" className="btn-neon bg-primary text-primary-foreground font-heading font-semibold px-10 h-14 text-base box-glow-green active:scale-[0.97] transition-transform">
                 Rejoignez-nous
                 <ArrowRight size={18} />
               </Button>
             </Link>
             <Link to="/services">
-              <Button variant="outline" size="lg" className="font-heading font-medium px-8 h-14 text-base border-primary/30 hover:border-primary/60 hover:text-primary active:scale-[0.97] transition-transform">
+              <Button variant="outline" size="lg" className="font-heading font-medium px-10 h-14 text-base border-primary/30 hover:border-primary/60 hover:text-primary active:scale-[0.97] transition-transform">
                 Découvrir nos services
               </Button>
             </Link>
@@ -123,8 +126,8 @@ function HeroSection() {
         </Reveal>
 
         {/* Stats row */}
-        <Reveal delay={500}>
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
+        <Reveal delay={650}>
+          <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
             {[
               { value: 7, suffix: "", label: "Produits & services" },
               { value: 8, suffix: "", label: "Rangs de progression" },
@@ -132,7 +135,7 @@ function HeroSection() {
               { value: 28, suffix: "%", label: "Delta max" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="font-heading font-bold text-3xl md:text-4xl text-primary text-glow-green">
+                <div className="font-heading font-bold text-3xl md:text-4xl text-primary text-glow-green tabular-nums">
                   <Counter end={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-xs text-muted-foreground mt-1 uppercase tracking-wide">
@@ -434,12 +437,6 @@ function AcademySection() {
 
 /* ─── PAYMENTS ─── */
 function PaymentsSection() {
-  const methods = [
-    { icon: CreditCard, name: "Carte bancaire", desc: "Visa, Mastercard" },
-    { icon: Wallet, name: "Revolut", desc: "Paiement instantané" },
-    { icon: Landmark, name: "Virement SEPA", desc: "Européen sécurisé" },
-  ];
-
   return (
     <section className="py-24 md:py-32">
       <div className="container mx-auto px-4 md:px-8">
@@ -452,13 +449,17 @@ function PaymentsSection() {
           </div>
         </Reveal>
 
-        <div className="flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
-          {methods.map((m, i) => (
-            <Reveal key={m.name} delay={i * 100}>
-              <div className="glass rounded-xl px-8 py-6 text-center min-w-[180px] hover:border-primary/30 transition-all duration-300">
-                <m.icon size={28} className="text-primary mx-auto mb-3" />
-                <p className="font-heading font-semibold text-sm text-foreground">{m.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{m.desc}</p>
+        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+          {[
+            { logo: <VisaLogo className="h-8 w-auto" />, name: "Visa" },
+            { logo: <MastercardLogo className="h-8 w-auto" />, name: "Mastercard" },
+            { logo: <RevolutLogo />, name: "Revolut" },
+            { logo: <SepaLogo />, name: "SEPA" },
+            { logo: <BancontactLogo />, name: "Bancontact" },
+          ].map((m, i) => (
+            <Reveal key={m.name} delay={i * 80}>
+              <div className="glass rounded-xl px-8 py-6 flex items-center justify-center min-w-[160px] min-h-[80px] hover:border-primary/30 transition-all duration-300">
+                {m.logo}
               </div>
             </Reveal>
           ))}
@@ -504,6 +505,7 @@ function NewsletterSection() {
 
 /* ─── PAGE INDEX ─── */
 export default function Index() {
+  useSEO({ title: "Accueil", description: "Mars Group : écosystème digital complet — 7 produits, 5 sources de revenus. Ekonom-IA, Auxil-IA, rénovation, immobilier et énergie.", path: "/" });
   return (
     <div className="min-h-screen relative z-10 overflow-hidden">
       <Navbar />

@@ -6,6 +6,7 @@ import {
   Bot, ShoppingBag, Building2, Home, Zap,
   ArrowRight, ChevronRight, ExternalLink
 } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -85,6 +86,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 };
 
 export default function Services() {
+  useSEO({ title: "Nos Services", description: "Ekonom-IA, Auxil-IA, Mara-A Construct, Mara-A Invest, Ecofix Énergie — 7 services digitaux, immobiliers et énergétiques.", path: "/services" });
   return (
     <div className="min-h-screen relative z-10">
       <Navbar />
