@@ -72,7 +72,7 @@ export function NetworkBackground() {
           const dy = nodes[i].y - nodes[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DIST) {
-            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.3;
             // Alternate colors
             const color = (i + j) % 3 === 0 ? green : blue;
             ctx!.strokeStyle = `rgba(${color.r},${color.g},${color.b},${alpha})`;
