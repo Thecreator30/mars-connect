@@ -24,7 +24,7 @@ export function NetworkBackground() {
     let nodes: Node[] = [];
     const CONNECTION_DIST = 220;
     const MOUSE_DIST = 280;
-    const NODE_COUNT_BASE = 70;
+    const NODE_COUNT_BASE = 40;
 
     function resize() {
       canvas!.width = window.innerWidth;
@@ -204,7 +204,7 @@ export function NetworkBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.9 }}
+      style={{ opacity: 0.6 }}
     />
   );
 }
