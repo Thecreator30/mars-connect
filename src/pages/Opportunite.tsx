@@ -8,6 +8,7 @@ import {
   DollarSign, Layers, Gift, Car, Home as HomeIcon,
   Zap, Info, ChevronRight, ShieldCheck
 } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 /* ─── Reveal ─── */
 function Reveal({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
