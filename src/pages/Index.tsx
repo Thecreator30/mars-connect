@@ -122,12 +122,12 @@ function HeroSection() {
 
         {/* Stats row */}
         <Reveal delay={500}>
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8">
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8">
             {[
-              { value: 5, suffix: "", label: "Services intégrés" },
+              { value: 7, suffix: "", label: "Produits & services" },
               { value: 8, suffix: "", label: "Rangs de progression" },
-              { value: 15, suffix: "+", label: "Conteneurs Docker" },
-              { value: 5, suffix: "", label: "Types de commissions" },
+              { value: 5, suffix: "", label: "Sources de revenus" },
+              { value: 28, suffix: "%", label: "Delta max" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="font-heading font-bold text-3xl md:text-4xl text-primary">
