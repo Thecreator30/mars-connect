@@ -10,6 +10,7 @@ import {
   Sparkles, Target, Globe
 } from "lucide-react";
 import { VisaLogo, MastercardLogo, RevolutLogo, SepaLogo, BancontactLogo } from "@/components/PaymentLogos";
+import { useSEO } from "@/hooks/useSEO";
 
 /* ─── Animated Counter ─── */
 function Counter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
