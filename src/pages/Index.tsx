@@ -122,12 +122,12 @@ function HeroSection() {
 
         {/* Stats row */}
         <Reveal delay={500}>
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8">
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8">
             {[
-              { value: 5, suffix: "", label: "Services intégrés" },
+              { value: 7, suffix: "", label: "Produits & services" },
               { value: 8, suffix: "", label: "Rangs de progression" },
-              { value: 15, suffix: "+", label: "Conteneurs Docker" },
-              { value: 5, suffix: "", label: "Types de commissions" },
+              { value: 5, suffix: "", label: "Sources de revenus" },
+              { value: 28, suffix: "%", label: "Delta max" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="font-heading font-bold text-3xl md:text-4xl text-primary">
@@ -254,8 +254,8 @@ function EcosystemSection() {
 /* ─── OPPORTUNITY ─── */
 function OpportunitySection() {
   const ranks = [
-    "Candidat", "Consultant", "Manager", "Directeur",
-    "Vice-Président", "Président", "Diamant", "Ambassadeur"
+    "Candidat", "Junior", "Senior", "Coach",
+    "Manager", "Directeur", "Président", "Ambassadeur"
   ];
 
   return (
@@ -265,16 +265,16 @@ function OpportunitySection() {
           <div className="text-center mb-16">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Opportunité</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" }}>
-              Un plan de rémunération structuré et ambitieux
+              Un plan de rémunération anti-pyramidal et équitable
             </h2>
           </div>
         </Reveal>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
           {[
-            { icon: TrendingUp, title: "5 types de commissions", desc: "Directes, par niveau, bonus de rang, matching et dossier — chaque vente récompensée." },
-            { icon: Award, title: "Fast Start 500€", desc: "Atteignez 25 000 BV en 15 jours et décrochez votre prime de démarrage rapide." },
-            { icon: Target, title: "Boost x1.5", desc: "À partir de 51 produits vendus, vos commissions passent au multiplicateur 1.5x." },
+            { icon: TrendingUp, title: "Système Delta", desc: "Calcul différentiel qui garantit l'équité : vos commissions reflètent vos ventes réelles, pas le recrutement." },
+            { icon: Award, title: "Fast Start 250 € + 250 €", desc: "Atteignez 25 000 BV en 60 jours — bonus versé au membre ET au parrain. Doublé à 50 000 BV." },
+            { icon: Target, title: "Jusqu'à 28 % Delta", desc: "8 rangs de progression avec des taux Delta de 0 % à 28 %, plus Mobility et Home Bonus." },
           ].map((item, i) => (
             <Reveal key={item.title} delay={i * 100}>
               <div className="glass rounded-2xl p-8 text-center hover:border-primary/30 transition-all duration-400">
