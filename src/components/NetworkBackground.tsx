@@ -21,8 +21,8 @@ export function NetworkBackground() {
 
     let animId: number;
     let nodes: Node[] = [];
-    const CONNECTION_DIST = 180;
-    const NODE_COUNT_BASE = 45;
+    const CONNECTION_DIST = 220;
+    const NODE_COUNT_BASE = 70;
 
     function resize() {
       canvas!.width = window.innerWidth;
