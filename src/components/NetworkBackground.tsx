@@ -24,7 +24,7 @@ export function NetworkBackground() {
     let nodes: Node[] = [];
     const CONNECTION_DIST = 220;
     const MOUSE_DIST = 280;
-    const NODE_COUNT_BASE = 70;
+    const NODE_COUNT_BASE = 40;
 
     function resize() {
       canvas!.width = window.innerWidth;
