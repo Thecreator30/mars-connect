@@ -247,7 +247,34 @@ function EcosystemSection() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 max-w-3xl mx-auto">
+            {services.slice(0, 2).map((s, i) => (
+              <Reveal key={s.name} delay={i * 80}>
+                <div className={`group glass rounded-2xl p-6 text-center ${s.border} transition-all duration-400 cursor-default`}>
+                  <div className={`w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-muted/50 ${s.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <s.icon size={24} />
+                  </div>
+                  <h3 className="font-heading font-semibold text-sm text-foreground mb-1">{s.name}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {services.slice(2).map((s, i) => (
+              <Reveal key={s.name} delay={(i + 2) * 80}>
+                <div className={`group glass rounded-2xl p-6 text-center ${s.border} transition-all duration-400 cursor-default`}>
+                  <div className={`w-12 h-12 rounded-xl mx-auto flex items-center justify-center mb-4 bg-muted/50 ${s.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <s.icon size={24} />
+                  </div>
+                  <h3 className="font-heading font-semibold text-sm text-foreground mb-1">{s.name}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
           {services.map((s, i) => (
             <Reveal key={s.name} delay={i * 80}>
               <div className={`group glass rounded-2xl p-6 text-center ${s.border} transition-all duration-400 cursor-default`}>
