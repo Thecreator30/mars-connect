@@ -434,12 +434,6 @@ function AcademySection() {
 
 /* ─── PAYMENTS ─── */
 function PaymentsSection() {
-  const methods = [
-    { icon: CreditCard, name: "Carte bancaire", desc: "Visa, Mastercard" },
-    { icon: Wallet, name: "Revolut", desc: "Paiement instantané" },
-    { icon: Landmark, name: "Virement SEPA", desc: "Européen sécurisé" },
-  ];
-
   return (
     <section className="py-24 md:py-32">
       <div className="container mx-auto px-4 md:px-8">
@@ -452,13 +446,17 @@ function PaymentsSection() {
           </div>
         </Reveal>
 
-        <div className="flex flex-wrap justify-center gap-6 max-w-3xl mx-auto">
-          {methods.map((m, i) => (
-            <Reveal key={m.name} delay={i * 100}>
-              <div className="glass rounded-xl px-8 py-6 text-center min-w-[180px] hover:border-primary/30 transition-all duration-300">
-                <m.icon size={28} className="text-primary mx-auto mb-3" />
-                <p className="font-heading font-semibold text-sm text-foreground">{m.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{m.desc}</p>
+        <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+          {[
+            { logo: <VisaLogo className="h-8 w-auto" />, name: "Visa" },
+            { logo: <MastercardLogo className="h-8 w-auto" />, name: "Mastercard" },
+            { logo: <RevolutLogo />, name: "Revolut" },
+            { logo: <SepaLogo />, name: "SEPA" },
+            { logo: <BancontactLogo />, name: "Bancontact" },
+          ].map((m, i) => (
+            <Reveal key={m.name} delay={i * 80}>
+              <div className="glass rounded-xl px-8 py-6 flex items-center justify-center min-w-[160px] min-h-[80px] hover:border-primary/30 transition-all duration-300">
+                {m.logo}
               </div>
             </Reveal>
           ))}
