@@ -21,6 +21,7 @@ function Reveal({ children, className = "", delay = 0 }: { children: React.React
 }
 
 export default function Contact() {
+  useSEO({ title: "Contact", description: "Contactez Mars Group pour rejoindre le réseau ou en savoir plus sur nos services digitaux, immobiliers et énergétiques.", path: "/contact" });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -42,6 +42,7 @@ const modules = [
 ];
 
 export default function Academie() {
+  useSEO({ title: "Académie", description: "Mars Academy : formations complètes pour maîtriser les produits, développer votre réseau et maximiser vos revenus.", path: "/academie" });
   return (
     <div className="min-h-screen relative z-10">
       <Navbar />

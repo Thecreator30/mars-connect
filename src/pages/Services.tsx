@@ -86,6 +86,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 };
 
 export default function Services() {
+  useSEO({ title: "Nos Services", description: "Ekonom-IA, Auxil-IA, Mara-A Construct, Mara-A Invest, Ecofix Énergie — 7 services digitaux, immobiliers et énergétiques.", path: "/services" });
   return (
     <div className="min-h-screen relative z-10">
       <Navbar />

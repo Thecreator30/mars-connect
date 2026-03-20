@@ -190,6 +190,7 @@ function DeltaExplainer() {
 
 /* ─── Page ─── */
 export default function Opportunite() {
+  useSEO({ title: "Opportunité", description: "Plan de commission Mars Group 2026 : 8 rangs, système Delta, Fast Start 250€+250€, Mobility et Home Bonus.", path: "/opportunite" });
   return (
     <div className="min-h-screen relative z-10">
       <Navbar />

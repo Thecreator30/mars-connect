@@ -505,6 +505,7 @@ function NewsletterSection() {
 
 /* ─── PAGE INDEX ─── */
 export default function Index() {
+  useSEO({ title: "Accueil", description: "Mars Group : écosystème digital complet — 7 produits, 5 sources de revenus. Ekonom-IA, Auxil-IA, rénovation, immobilier et énergie.", path: "/" });
   return (
     <div className="min-h-screen relative z-10 overflow-hidden">
       <Navbar />
