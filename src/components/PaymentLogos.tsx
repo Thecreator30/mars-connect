@@ -45,10 +45,10 @@ export function SepaLogo({ className = "" }: { className?: string }) {
 export function BancontactLogo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <svg viewBox="0 0 40 28" className="w-10 h-7" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="20" height="28" rx="4" fill="#005498" />
-        <rect x="16" y="0" width="24" height="28" rx="4" fill="#FFD800" />
-        <ellipse cx="20" cy="14" rx="8" ry="10" fill="#005498" opacity="0.6" />
+      <svg viewBox="0 0 48 32" className="w-12 h-8" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="16" r="13" fill="#005DA6" />
+        <circle cx="30" cy="16" r="13" fill="#FFCC00" />
+        <path d="M24 4.54a13 13 0 0 1 0 22.92A13 13 0 0 1 24 4.54z" fill="#008B4A" opacity="0.7" />
       </svg>
       <span className="font-heading font-bold text-sm text-foreground/80 tracking-tight">Bancontact</span>
     </div>
