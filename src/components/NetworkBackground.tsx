@@ -26,7 +26,7 @@ export function NetworkBackground() {
 
     function resize() {
       canvas!.width = window.innerWidth;
-      canvas!.height = document.documentElement.scrollHeight;
+      canvas!.height = window.innerHeight;
     }
 
     function initNodes() {
