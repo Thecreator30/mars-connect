@@ -86,7 +86,7 @@ const colorMap: Record<string, { bg: string; text: string; border: string }> = {
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative z-10">
       <Navbar />
 
       {/* Hero */}

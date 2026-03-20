@@ -190,7 +190,7 @@ function DeltaExplainer() {
 /* ─── Page ─── */
 export default function Opportunite() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative z-10">
       <Navbar />
 
       {/* Hero */}
