@@ -49,12 +49,38 @@ export function NetworkBackground() {
     const green = { r: 0, g: 199, b: 100 };
     const blue = { r: 46, g: 63, b: 173 };
 
+    let gradientOffset = 0;
+
     function draw() {
       const w = canvas!.width;
       const h = canvas!.height;
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
+
+      // Animated gradient background
+      gradientOffset += 0.002;
+      const gx = Math.sin(gradientOffset) * 0.3 + 0.5;
+      const gy = Math.cos(gradientOffset * 0.7) * 0.3 + 0.5;
+      const gx2 = Math.cos(gradientOffset * 1.3) * 0.3 + 0.5;
+      const gy2 = Math.sin(gradientOffset * 0.9) * 0.3 + 0.5;
+
       ctx!.clearRect(0, 0, w, h);
+
+      // Orb 1 — green
+      const g1 = ctx!.createRadialGradient(gx * w, gy * h, 0, gx * w, gy * h, w * 0.45);
+      g1.addColorStop(0, "rgba(0, 199, 100, 0.08)");
+      g1.addColorStop(0.5, "rgba(0, 199, 100, 0.03)");
+      g1.addColorStop(1, "rgba(0, 199, 100, 0)");
+      ctx!.fillStyle = g1;
+      ctx!.fillRect(0, 0, w, h);
+
+      // Orb 2 — blue
+      const g2 = ctx!.createRadialGradient(gx2 * w, gy2 * h, 0, gx2 * w, gy2 * h, w * 0.4);
+      g2.addColorStop(0, "rgba(46, 63, 173, 0.1)");
+      g2.addColorStop(0.5, "rgba(46, 63, 173, 0.04)");
+      g2.addColorStop(1, "rgba(46, 63, 173, 0)");
+      ctx!.fillStyle = g2;
+      ctx!.fillRect(0, 0, w, h);
 
       for (const n of nodes) {
         n.x += n.vx;
