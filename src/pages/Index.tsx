@@ -174,7 +174,7 @@ function FlagshipSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative">
+    <section className="py-14 md:py-20 relative">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="text-center mb-16">
@@ -236,7 +236,7 @@ function EcosystemSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative bg-card/30">
+    <section className="py-14 md:py-20 relative bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="text-center mb-16">
@@ -288,7 +288,7 @@ function OpportunitySection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative">
+    <section className="py-14 md:py-20 relative">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="text-center mb-16">
@@ -361,7 +361,7 @@ function AdvantagesSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-card/30">
+    <section className="py-14 md:py-20 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="text-center mb-16">
@@ -393,7 +393,7 @@ function AdvantagesSection() {
 /* ─── TESTIMONIAL ─── */
 function TestimonialSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
@@ -423,7 +423,7 @@ function TestimonialSection() {
 /* ─── ACADEMY ─── */
 function AcademySection() {
   return (
-    <section className="py-24 md:py-32 bg-card/30">
+    <section className="py-14 md:py-20 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto glass rounded-2xl p-10 md:p-14 text-center border-accent/10">
@@ -453,7 +453,7 @@ function AcademySection() {
 /* ─── PAYMENTS ─── */
 function PaymentsSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="text-center mb-12">
@@ -487,7 +487,7 @@ function PaymentsSection() {
 /* ─── NEWSLETTER ─── */
 function NewsletterSection() {
   return (
-    <section className="py-24 md:py-32 bg-card/30">
+    <section className="py-14 md:py-20 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="max-w-xl mx-auto text-center">
