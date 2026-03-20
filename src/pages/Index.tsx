@@ -127,7 +127,7 @@ function HeroSection() {
 
         {/* Stats row */}
         <Reveal delay={650}>
-          <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 glass rounded-2xl p-8 border-primary/10">
             {[
               { value: 7, suffix: "", label: "Produits & services" },
               { value: 8, suffix: "", label: "Rangs de progression" },
@@ -174,10 +174,10 @@ function FlagshipSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative">
+    <section className="py-14 md:py-20 relative">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Produits phares</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Deux solutions qui révolutionnent le terrain
@@ -236,10 +236,10 @@ function EcosystemSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative bg-card/30">
+    <section className="py-14 md:py-20 relative bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Écosystème</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Un portefeuille complet de services
@@ -288,10 +288,10 @@ function OpportunitySection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative">
+    <section className="py-14 md:py-20 relative">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Opportunité</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Un plan de rémunération anti-pyramidal et équitable
@@ -299,7 +299,7 @@ function OpportunitySection() {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-10">
           {[
             { icon: TrendingUp, title: "Système Delta", desc: "Calcul différentiel qui garantit l'équité : vos commissions reflètent vos ventes réelles, pas le recrutement.", color: "primary" },
             { icon: Award, title: "Fast Start 250 € + 250 €", desc: "Atteignez 25 000 BV en 60 jours — bonus versé au membre ET au parrain. Doublé à 50 000 BV.", color: "accent" },
@@ -361,10 +361,10 @@ function AdvantagesSection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-card/30">
+    <section className="py-14 md:py-20 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <p className="text-primary text-sm font-medium uppercase tracking-widest mb-3">Avantages</p>
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-foreground" style={{ textWrap: "balance" as any }}>
               Pourquoi Mars Group
@@ -393,7 +393,7 @@ function AdvantagesSection() {
 /* ─── TESTIMONIAL ─── */
 function TestimonialSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto text-center">
@@ -423,7 +423,7 @@ function TestimonialSection() {
 /* ─── ACADEMY ─── */
 function AcademySection() {
   return (
-    <section className="py-24 md:py-32 bg-card/30">
+    <section className="py-14 md:py-20 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="max-w-3xl mx-auto glass rounded-2xl p-10 md:p-14 text-center border-accent/10">
@@ -453,7 +453,7 @@ function AcademySection() {
 /* ─── PAYMENTS ─── */
 function PaymentsSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-14 md:py-20">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="text-center mb-12">
@@ -487,7 +487,7 @@ function PaymentsSection() {
 /* ─── NEWSLETTER ─── */
 function NewsletterSection() {
   return (
-    <section className="py-24 md:py-32 bg-card/30">
+    <section className="py-14 md:py-20 bg-card/30">
       <div className="container mx-auto px-4 md:px-8">
         <Reveal>
           <div className="max-w-xl mx-auto text-center">
