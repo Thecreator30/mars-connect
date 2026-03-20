@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import {
   Bot, ShoppingBag, Building2, Home, Zap,
   TrendingUp, Shield, Users, Award, ArrowRight,
-  Star, CreditCard, Wallet, Landmark, Mail, ChevronRight,
+  Star, Mail, ChevronRight,
   Sparkles, Target, Globe
 } from "lucide-react";
+import { VisaLogo, MastercardLogo, RevolutLogo, SepaLogo, BancontactLogo } from "@/components/PaymentLogos";
 
 /* ─── Animated Counter ─── */
 function Counter({ end, suffix = "", prefix = "" }: { end: number; suffix?: string; prefix?: string }) {
