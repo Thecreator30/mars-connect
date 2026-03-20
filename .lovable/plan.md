@@ -1,47 +1,56 @@
 
 
-# Redesign complet Mars Group — Site vitrine MLM
+# Mise à jour de la page Opportunité avec le vrai plan de commission
 
-## Design System
-- **Palette** : Fond dark (#0a0f1a), vert néon (#00e676), cyan (#00bcd4), blanc, gris doux
-- **Style** : Dark premium futuriste — glassmorphism, gradients néon subtils, animations fluides, effets de particules/glow
-- **Typographie** : Inter/Space Grotesk — titres bold majuscules, corps lisible
+Le PDF "Plan de Commission 2026" contient des données très différentes de ce qui est actuellement sur le site. Voici les corrections à apporter.
 
-## Structure multi-pages
+## Données à corriger
 
-### 1. Page d'accueil (Hero + Sections)
-- **Hero plein écran** : Titre animé "L'écosystème digital qui change les règles", fond avec effet particules/grille animée, CTA "Rejoignez-nous" + "Découvrir nos produits" avec glow vert
-- **Section Produits Phares** : Cards glassmorphism pour Ekonom-IA et Auxil-IA avec icônes animées et descriptions courtes
-- **Section Écosystème** : Grille visuelle des 5 services (Auxil-IA, Ekonom-IA, Mara-A Construct, Mara-A Invest, Énergie) avec hover effects néon
-- **Section Opportunité** : Aperçu du plan de rémunération — 8 rangs, 5 types de commissions, chiffres clés animés (compteurs)
-- **Section Avantages** : 3 colonnes (Facilité, Support, Sécurité) avec icônes et glassmorphism
-- **Témoignage** : Slider avec citation et photo
-- **Section Académie** : Présentation de la formation avec CTA
-- **Section Paiements** : Méthodes de paiement (Revolut, Stripe, virement) avec icônes
-- **Newsletter** : Champ email avec design néon
-- **Footer** : Logo, liens, réseaux sociaux
+### 8 Rangs (actuellement incorrects)
+Les rangs actuels sur le site sont faux. Voici les vrais :
 
-### 2. Page Nos Services
-- Présentation détaillée de chaque service avec visuels, features lists et CTA vers les plateformes externes
+| Rang | PV Min | GV Min | Delta | Mobility | Home |
+|------|--------|--------|-------|----------|------|
+| Candidat | 0 | 0 | 0% | — | — |
+| Junior | 500 | 0 | 4% | — | — |
+| Senior | 1 000 | 5 000 | 8% | — | — |
+| Coach | 2 000 | 25 000 | 12% | 500€ | — |
+| Manager | 3 000 | 75 000 | 16% | 1 250€ | 1 250€ |
+| Directeur | 5 000 | 200 000 | 20% | 2 250€ | 2 250€ |
+| Président | 7 500 | 500 000 | 24% | 3 500€ | 3 500€ |
+| Ambassadeur | 10 000 | 1 000 000 | 28% | 6 000€ | 6 000€ |
 
-### 3. Page Opportunité
-- Plan de rémunération détaillé : tableau des rangs, types de commissions, Fast Start, Boost multiplicateur
-- Timeline de progression visuelle
-- Simulateur simplifié de revenus (interactif)
+### 5 Sources de revenus (pas "types de commissions")
+1. **Commission Directe (Retail)** — sur ventes personnelles
+2. **Leadership Delta** — différentiel sur BV downline
+3. **Fast Start Bonus** — 250€/500€ membre + parrain (60 jours)
+4. **Mobility Bonus** — prime fixe mensuelle par rang (Delta)
+5. **Home Bonus** — prime fixe mensuelle par rang (Delta)
 
-### 4. Page Académie
-- Présentation des formations disponibles, avantages, CTA inscription
+### Simulateur de revenus
+Actuellement le simulateur utilise des formules inventées. Il faut le remplacer par les vrais scénarios du PDF (Scénario A terrain, Scénario B digital).
 
-### 5. Page Contact
-- Formulaire de contact fonctionnel avec validation
-- Coordonnées et réseaux sociaux
+## Modifications fichiers
 
-### 6. Navigation
-- Navbar fixe transparente avec effet blur au scroll, logo Mars, liens (Accueil, Services, Opportunité, Académie, Contact), bouton "Me Connecter" néon
+### 1. `src/pages/Opportunite.tsx`
+- Corriger les rangs avec PV/GV/Delta/Mobility/Home
+- Remplacer les 5 types de commissions par les 5 vraies sources
+- Mettre à jour le Fast Start (250€+250€ à 25k BV en 60j, 500€+500€ à 50k BV)
+- Ajouter section écosystème produits avec tableau des commissions par produit
+- Refaire le simulateur avec les vrais taux (4% Candidat / 8% Junior+ pour Mara-A, 149€ fixe Auxil-IA, etc.)
+- Ajouter section "Potentiel par rang" avec le tableau du PDF
+- Ajouter mention légale "Income Disclosure"
 
-### Animations & Effets
-- Scroll reveal (fade-in, slide-up) sur toutes les sections
-- Compteurs animés pour les chiffres clés
-- Hover glow néon sur les cards et boutons
-- Fond avec grille animée ou particules subtiles dans le hero
+### 2. `src/pages/Index.tsx`
+- Mettre à jour la section Opportunité de la homepage avec les bons chiffres (Fast Start 250€+250€, système Delta)
+
+### 3. `src/pages/Services.tsx`  
+- Ajouter les vrais produits manquants : Ecofix Énergie, Assurances
+- Corriger les descriptions avec les vrais montants de commission
+
+## Approche technique
+- Tableaux glassmorphism avec les vraies données structurées
+- Simulateur interactif basé sur les vrais taux par produit
+- Sections visuelles pour la formule Delta avec exemple concret
+- Conformité légale en bas de page
 
